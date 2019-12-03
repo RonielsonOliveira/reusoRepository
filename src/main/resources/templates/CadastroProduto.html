@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="./listar">Produtos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/logout">Logout</a>
+        <li class="nav-item">
+        <a class="nav-link" href="/pessoa/logar">Login</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+<form class="col-sm-8  col-lg-9" method="POST" action="/produto/salvar" enctype="multipart/form-data" th:object="${produto}">
+<input type="hidden" th:field="*{id}">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nome</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" th:field=*{nome}>
+    
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">Preco</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" th:field="*{preco}">
+  </div>
+  
+  
+  <div class="form-group">
+  
+  	Selecione Imagem do Produto: <input type="file" name="imagem">
+  
+  
+  </div>  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+<script src="/js/bootstrap.min.js">  </script>
+</body>
+</html>

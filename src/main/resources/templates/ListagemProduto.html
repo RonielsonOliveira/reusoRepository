@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="../produto/listar">Produtos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/logout">Logout</a>
+        <li class="nav-item">
+        <a class="nav-link" href="/pessoa/logar">Login</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="../Compra/Carrinho">Carrinho</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+<table class=" box column table col-sm-5  col-lg-6"  method="POST" action="/Compra/salvar" enctype="multipart/form-data" th:object="${produto}">
+  <thead>
+    <tr class="box column">
+      <th scope="col">Codigo</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Preço</th>
+        <td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/produto/CadastroProduto}"><button type="button" class="btn btn-primary rounded float-right">Adicionar Produto</button></a> </td>
+    </tr>
+  </thead>
+  <tbody>
+      <tr th:each="produto: ${todosOsProdutos}">
+      <td th:text="${produto.id}"></td>
+      <td th:text="${produto.nome}"></td>
+      <td th:text = "${produto.preco}"></td>
+      
+      <td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/produto/{id}(id = ${produto.id})}"><button type="button" class="btn btn-primary">Atualizar</button></a> </td>
+      <td sec:authorize="hasRole('ADMIN')"> <a class="btn btn-danger" th:href="@{/produto/excluir/{id}(id = ${produto.id})}"> Excluir </a> </td>
+      <td> <img width= "250"  alt="" th:src="@{'/images/'+${produto.nome}+.png}"/> </td>
+      <td  sec:authorize="hasRole('USER')"> <a th:href= "@{/Compra/add/{id}(id = ${produto.id})}" ><button type="button" class="btn btn-primary" >Comprar</button></a>  </td>
+          <td sec:authorize="isAnonymous()"> <a th:href= "@{/Compra/add/{id}(id = ${produto.id})}"><button type="button" class="btn btn-primary " >Comprar</button></a>  </td>
+      
+      
+          </tr>
+  
+  </tbody>
+</table>
+
+
+
+<script src="/js/bootstrap.min.js">  </script>
+
+</body>
+</html>
